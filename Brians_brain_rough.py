@@ -183,9 +183,9 @@ def updateGrid(apperentlyFourVariablesAreBeingSentIDontBeliveItButThisFixesIt, n
 					futureGrid[x, y] = ON
 			
 
-	#update the next frame, now that it's been worked on
-	nextFrame.set_data(futureGrid)
+	#update the now current recalculated grid, set the next frame and return it animation
 	grid[:] = futureGrid[:]
+	nextFrame.set_data(grid)
 
 	return nextFrame
 
@@ -223,11 +223,11 @@ def main():
 	# will be using plt lib from matplotlib to keep track of state
 	# will be using animation from matplotlib...for animation
 
-	#set up, create  and axes subplot for animation
+	#set up, create figure that is used to draw objects, and axes subplot for animation
 	gridFig, axES = plt.subplots()
 
 	#set up 
-	nextFrame = axES.imshow(grid)
+	nextFrame = axES.imshow(grid, cmap=plt.cm.hot)
 
 	#a lil libray useage I don't completely understand in order to make things print pretty
 	brainsAnimation = animation.FuncAnimation(gridFig, updateGrid, fargs=(nextFrame, grid, N ) ) 
